@@ -1,0 +1,17 @@
+<div class="implement-wrapper">
+  <div [ngClass]="{'hidden': !implemented}">
+      <p>{{title}} {{value}}%</p>
+      <p>Scales with population, average income</p>
+      <p>Expected changes next turn: 5 Mln cost + {{expectedChange}} income</p>
+      <div>
+          <input type="range" min="1" max="99" value="{{value}}" class="slider" (input)="onChange($event)">
+        </div>      
+        <button class="btn btn-default btn-cons" (click)="onCancel($event)">Cancel</button>
+  </div>
+
+  <div [ngClass]="{'hidden': implemented}">
+      <p>{{title}}</p>
+      <p>Scales with population, average income</p>
+      <button class="btn btn-primary btn-cons" (click)="onImplement($event)">Implement</button>
+  </div>
+</div>
