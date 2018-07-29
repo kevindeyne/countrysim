@@ -1,3 +1,5 @@
+import { ImplementSliderComponent } from './ui-comp/implement-slider/implement-slider.component';
+import { PopulationGroup } from './domain/populationGroup';
 import { Country } from './domain/country';
 import { Injectable } from '@angular/core';
 
@@ -6,7 +8,7 @@ export class WorldState {
 
   static w: WorldState;
 
-  public myCountry = new Country();
+  public myCountry;
   public countries = [];
   public turnNumber = 0;
 
@@ -31,46 +33,33 @@ export class WorldState {
   }
 
   initialSetup() {
+    this.myCountry = new Country();
     this.initialCanada();
   }
 
+  // 102% https://tradingeconomics.com/canada/gross-national-expenditure-percent-of-gdp-wb-data.html
   initialCanada() {
     this.myCountry.name = 'Canada';
     this.myCountry.surplus = -1400106060303;
     this.myCountry.gdp = 1790000000000;
-    this.myCountry.income = 1575956067383; // world bank via google
-    // 102% https://tradingeconomics.com/canada/gross-national-expenditure-percent-of-gdp-wb-data.html
+    this.myCountry.income = 1575956067383;
     this.myCountry.expenditure = 1571956067383;
 
     this.myCountry.growthRate = 0.73;
 
-    const poorGroup = new Object();
-    poorGroup.name = 'POOR';
-    poorGroup.populationCount = 4448041; // 12%
-    poorGroup.happiness = 30;
-    poorGroup.averageIncome = 10133 / 12 * 4;
+    this.myCountry.population['POOR'] = new PopulationGroup('POOR', 4448041, 30, 10133);
+    this.myCountry.population['WORKING_CLASS'] = new PopulationGroup('WORKING_CLASS', 11861443, 40, 22200);
+    this.myCountry.population['MIDDLE_CLASS'] = new PopulationGroup('MIDDLE_CLASS', 17792165, 60, 27600);
+    this.myCountry.population['UPPER_CLASS'] = new PopulationGroup('UPPER_CLASS', 1853350, 80, 80400);
 
-    const workingClassGroup = new Object();
-    workingClassGroup.name = 'WORKING_CLASS';
-    workingClassGroup.populationCount = 11861443; // 32%
-    workingClassGroup.happiness = 30;
-    workingClassGroup.averageIncome = 22200 / 12 * 4;
+    const flatRateIndexTax = new ImplementSliderComponent();
+    flatRateIndexTax.id = 'flat-rate-income-tax';
+    flatRateIndexTax.implemented = true;
+    flatRateIndexTax.value = 20;
+    this.myCountry.policies['flat-rate-income-tax'] = flatRateIndexTax;
 
-    const middleClassGroup = new Object();
-    middleClassGroup.name = 'MIDDLE_CLASS';
-    middleClassGroup.populationCount = 17792165; // 48%
-    middleClassGroup.happiness = 30;
-    middleClassGroup.averageIncome = 27600 / 12 * 4;
 
-    const upperClassGroup = new Object();
-    upperClassGroup.name = 'UPPER_CLASS';
-    upperClassGroup.populationCount = 1853350; // 5%
-    upperClassGroup.happiness = 30;
-    upperClassGroup.averageIncome = 80400 / 12 * 4;
+    // 26 --rich
 
-    this.myCountry.population['POOR'] = poorGroup;
-    this.myCountry.population['WORKING_CLASS'] = workingClassGroup;
-    this.myCountry.population['MIDDLE_CLASS'] = middleClassGroup;
-    this.myCountry.population['UPPER_CLASS'] = upperClassGroup;
   }
 }

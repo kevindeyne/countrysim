@@ -61,6 +61,7 @@ import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
 
 import { CorporateLayoutComponent } from './@pages/layouts/corporate/corporate.component';
 import { BlankCorporateComponent } from './@pages/layouts/blank-corporate/blank-corporate.component';
+import { EnergyComponent } from './policies/energy/energy.component';
 
 const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -95,6 +96,7 @@ import { ImplementSliderComponent } from './ui-comp/implement-slider/implement-s
     CorporateDashboardComponent,
     LaborComponent,
     TaxesComponent,
+    EnergyComponent,
     ImplementSliderComponent
   ],
   imports: [

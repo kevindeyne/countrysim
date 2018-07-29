@@ -1,3 +1,4 @@
+import { WorldState } from './../worldstate';
 import { Injectable } from '@angular/core';
 
 @Injectable()
@@ -9,6 +10,7 @@ export class Country {
   public income = 0;
   public expenditure = 0;
   public surplus = 0;
+  public growthRate = 0;
 
   public population = new Object();
   public policies = new Object();
@@ -25,13 +27,24 @@ export class Country {
     }
     this.surplus += this.income - this.expenditure;
 
-    console.log('End turn for ' + this.name);
+    this.populationGrowth();
   }
 
   private resetIncome() {
     // TODO add to history
     this.income = 0;
     this.expenditure = 0;
+  }
+
+  private populationGrowth() {
+    if (WorldState.getInstance().turnNumber % 4 === 0) {
+      for (const populationKey in this.population) {
+        if (this.population.hasOwnProperty(populationKey)) {
+          // TODO add to history
+          this.population[populationKey].populationCount += (this.population[populationKey].populationCount / 100 * 0.73);
+        }
+      }
+    }
   }
 
   getPopulationCount(): int {

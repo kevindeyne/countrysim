@@ -8,7 +8,9 @@ export class TaxesComponent implements OnInit {
 
   listings = [{
     id: 'flat-rate-income-tax',
-    title: 'Flat rate income tax'
+    title: 'Flat rate income tax',
+    implemented: true,
+    value: 20
   }, {
     id: 'carbon-tax',
     title: 'Carbon tax'

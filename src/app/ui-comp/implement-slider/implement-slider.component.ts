@@ -12,8 +12,8 @@ export class ImplementSliderComponent implements OnInit {
 
   @Input() public title = 'Flat rate income tax';
   @Input() public id;
-  public value = 0;
-  public implemented = false;
+  @Input() public value = 0;
+  @Input() public implemented = false;
   public originalValue = 10;
 
   private expectedChange = 0;
@@ -25,7 +25,6 @@ export class ImplementSliderComponent implements OnInit {
   onChange(event) {
     this.value = event.target.value;
     const change = this.value - this.originalValue;
-
 
     this.expectedChange = Changes.visualizeMoneyWPrefix(this.getIncome(), '+');
 

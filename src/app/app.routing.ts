@@ -4,6 +4,7 @@ import { CorporateLayoutComponent } from './@pages/layouts/corporate/corporate.c
 import { CorporateDashboardComponent } from './dashboard/dashboard.component';
 import { LaborComponent } from './policies/labor/labor.component';
 import { TaxesComponent } from './policies/taxes/taxes.component';
+import { EnergyComponent } from './policies/energy/energy.component';
 
 export const AppRoutes: Routes = [
   {
@@ -21,6 +22,9 @@ export const AppRoutes: Routes = [
     }, {
       path: 'taxes',
       component: TaxesComponent
+    }, {
+      path: 'energy',
+      component: EnergyComponent
     }]
   }
 ];
