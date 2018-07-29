@@ -10,7 +10,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class ImplementSliderComponent implements OnInit {
 
-  @Input() public title = 'Flat rate income tax';
+  @Input() public title = '';
   @Input() public id;
   @Input() public value = 0;
   @Input() public implemented = false;
@@ -20,13 +20,17 @@ export class ImplementSliderComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    if (this.implemented) {
+      this.calculateExpectedChange();
+    }
+  }
 
   onChange(event) {
     this.value = event.target.value;
     const change = this.value - this.originalValue;
 
-    this.expectedChange = Changes.visualizeMoneyWPrefix(this.getIncome(), '+');
+    this.calculateExpectedChange();
 
     Changes.getInstance().addAction(this.id, this);
   }
@@ -36,7 +40,7 @@ export class ImplementSliderComponent implements OnInit {
     this.value = 10;
     this.originalValue = 0;
 
-    this.expectedChange = Changes.visualizeMoneyWPrefix(this.getIncome(), '+');
+    this.calculateExpectedChange();
 
     Changes.getInstance().addAction(this.id, this);
   }
@@ -50,6 +54,10 @@ export class ImplementSliderComponent implements OnInit {
 
   onEndTurn() {
     this.originalValue = this.value;
+  }
+
+  calculateExpectedChange() {
+    this.expectedChange = Changes.visualizeMoneyWPrefix(this.getIncome(), '+');
   }
 
   getIncome(): int {
